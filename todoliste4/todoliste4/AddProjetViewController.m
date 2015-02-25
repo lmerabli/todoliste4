@@ -33,7 +33,8 @@
     [super viewDidLoad];
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     _managedObjectContext = [appDelegate managedObjectContext];
-    // Do any additional setup after loading the view.
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,19 +45,31 @@
 
 -(IBAction)saveNameProjet:(id)sender
 {
-    Projects * resultNameProjet = [NSEntityDescription insertNewObjectForEntityForName:@"libelle_projet" inManagedObjectContext:_managedObjectModel];
+  
+    Projects * resultNameProjet = [NSEntityDescription insertNewObjectForEntityForName:@"libelle_projet" inManagedObjectContext:_managedObjectContext];
+    
+    [resultNameProjet setLibelle_projet:addProjetName.text];
+    
+    
+  /*
   //  [Projects setVersion:addProjetName.text];///video met setMake:
     [Projects setVersion:sender];///video met setMake:
 
     // [Projects setlibelle_projet:sender];
+   */
    
-   /*
     NSError *error = nil;
     if(![_managedObjectContext save:&error])
     {
         NSLog(@"error %@",error);
     }
-    */
+    
+    addProjetName.text = NULL;
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
 }
 /*
 #pragma mark - Navigation
